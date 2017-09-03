@@ -4,7 +4,7 @@ angular.module('ansiToHtml', [])
     'ansi2html', (
 	function() {	    
 	    
-	    var Filter, STYLES, defaults, extend, toHexString, _i, _results,
+	    var Filter, STYLES, extend, toHexString, _i, _results,
 	    __slice = [].slice;
 	    
 	    STYLES = {
@@ -105,10 +105,6 @@ angular.module('ansiToHtml', [])
 		return dest;
 	    };
 	    
-	    defaults = {
-		fg: '#FFF',
-		bg: '#000'
-	    };
 	    
 	    Filter = (function() {
 			  
@@ -116,7 +112,7 @@ angular.module('ansiToHtml', [])
 			      if (options == null) {
 				  options = {};
 			      }
-			      this.opts = extend({}, defaults, options);
+			      this.opts = extend({}, options);
 			      this.input = [];
 			      this.stack = [];
 			  }
@@ -174,7 +170,7 @@ angular.module('ansiToHtml', [])
 				      callback(_this.pushStyle("ef" + (code - 30)));
 				  }
 				  if (code === 39) {
-				      callback(_this.pushStyle("color:" + _this.opts.fg));
+					  callback(_this.resetStyles());
 				  }
 				  if ((39 < code && code < 48)) {
 				      callback(_this.pushStyle("eb" + (code - 40)));
