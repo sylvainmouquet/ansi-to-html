@@ -1,0 +1,21 @@
+{
+  "name": "ansi-to-html",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jorgeecardona/ansi-to-html",
+  "authors": [
+    "Jorge Eduardo Cardona G <jorgeecardona@gmail.com>"
+  ],
+  "description": "Convert ANSI to html code",
+  "main": "ansi2html.js",
+  "keywords": [
+    "ansi",
+    "ansi2html",
+    "html"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "license": "MIT"
+}
