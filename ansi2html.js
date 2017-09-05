@@ -228,7 +228,7 @@ angular.module('ansiToHtml', [])
 				  style = STYLES[style];
 			      }
 			      this.stack.push(tag);
-			      return [prefixTag + tag, (style ? " style=\"" + style + "\"" : void 0), suffixTag.join('');
+			      return [prefixTag + tag, (style ? " style=\"" + style + "\"" : void 0), suffixTag].join('');
 			  };
 			  
 			  Filter.prototype.pushStyle = function(style) {
