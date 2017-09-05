@@ -17,3 +17,9 @@ Just include the file and in any place you want to use add the dependency to you
     app.controller('contr', function($scope, ansi2html) {
          $scope.text = ansi2html.toHtml("some ansi text"); 
     })
+   
+bower.json
+=====
+    "dependencies": { 
+        "ansi-to-html": "~0.0.2"    
+    }
