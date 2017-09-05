@@ -6,7 +6,8 @@ angular.module('ansiToHtml', [])
 	    
 	    var Filter, STYLES, extend, toHexString, _i, _results,
 	    __slice = [].slice;
-	    
+		
+		var prefixTag = suffixTag = '';
 	    STYLES = {
 		'ef0': 'color:#000',
 		'ef1': 'color:#A00',
@@ -118,7 +119,9 @@ angular.module('ansiToHtml', [])
 			  }
 			  
 			  Filter.prototype.toHtml = function(input) {
-			      var buf;
+				  var buf;
+				  prefixTag = '<';
+				  suffixTag = '>';
 			      this.input = typeof input === 'string' ? [input] : input;
 			      buf = [];
 			      this.forEach(function(chunk) {
@@ -127,6 +130,19 @@ angular.module('ansiToHtml', [])
 			      this.input = [];
 			      return buf.join('');
 			  };
+
+			  Filter.prototype.toBBCode = function(input) {
+				var buf;
+				prefixTag = '[';
+				suffixTag = ']';
+				this.input = typeof input === 'string' ? [input] : input;
+				buf = [];
+				this.forEach(function(chunk) {
+						 return buf.push(chunk);
+					 });
+				this.input = [];
+				return buf.join('');
+			};
 			  
 			  Filter.prototype.forEach = function(callback) {
 			      var buf, handleDisplay,
@@ -212,7 +228,7 @@ angular.module('ansiToHtml', [])
 				  style = STYLES[style];
 			      }
 			      this.stack.push(tag);
-			      return ["<" + tag, (style ? " style=\"" + style + "\"" : void 0), ">"].join('');
+			      return [prefixTag + tag, (style ? " style=\"" + style + "\"" : void 0), suffixTag.join('');
 			  };
 			  
 			  Filter.prototype.pushStyle = function(style) {
@@ -225,7 +241,7 @@ angular.module('ansiToHtml', [])
 				  last = this.stack.pop();
 			      }
 			      if (last != null) {
-				  return "</" + style + ">";
+				  return prefixTag + "/" + style + suffixTag;
 			      }
 			  };
 			  
@@ -233,7 +249,7 @@ angular.module('ansiToHtml', [])
 			      var stack, _ref;
 			      _ref = [this.stack, []], stack = _ref[0], this.stack = _ref[1];
 			      return stack.reverse().map(function(tag) {
-							     return "</" + tag + ">";
+							     return prefixTag + "/" + tag + suffixTag;
 							 }).join('');
 			  };
 			  
